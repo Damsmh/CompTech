@@ -6,32 +6,33 @@ const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
+const cartRoutes = require('./routes/cartRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 dotenv.config();
 const app = express();
 
-// Connect to MongoDB
 connectDB();
 
-// Set up Handlebars
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
+hbs.registerHelper('multiply', function(a, b) { return Number(a) * Number(b); });
+hbs.registerHelper('plus', function(a, b) { return Number(a) = Number(a) + Number(b); });
 
-// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('home', { layout: 'layouts/main' });
 });
 app.use('/products', productRoutes);
 app.use('/', authRoutes);
+app.use('/cart', cartRoutes);
+app.use('/order', orderRoutes);
 
-// Error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something went wrong!');

@@ -1,0 +1,29 @@
+<h1>Cart</h1>
+<h2>Общая сумма корзины: {{totalsum}}</h2>
+<form method="POST" action="/order/add">
+  <button type="submit">Buy All</button>
+</form>
+<ul>
+  {{#each products}}
+    <li>
+      <a href="/products/{{this.product._id}}">{{this.product.name}}</a> - {{this.product.price}}₽
+        <span>Количество: {{this.quantity}}</span>
+        <span>Сумма: {{multiply this.product.price this.quantity}}₽</span>
+        <form method="POST" action="/cart/update/{{this.product._id}}" style="display:inline;" class="update-form">
+            <input type="number" name="quantity" value="{{this.quantity}}" min="1" max="{{this.product.stock}}" required>
+        </form>
+        <form method="POST" action="/cart/remove/{{this.product._id}}" style="display:inline;">
+            <button type="submit">Remove</button>
+        
+        </form>
+    </li>
+  {{/each}}
+</ul>
+
+<script>
+document.querySelectorAll('.update-form input[name="quantity"]').forEach(input => {
+  input.addEventListener('change', function() {
+    this.form.submit();
+  });
+});
+</script>

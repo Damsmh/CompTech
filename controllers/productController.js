@@ -1,34 +1,32 @@
 const Product = require('../models/Product');
 
-// Get all products
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.render('products', { products });
+    res.render('products', { products, layout: 'layouts/main' });
   } catch (err) {
     res.status(500).send('Server Error');
   }
 };
 
-// Get single product
 exports.getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(404).send('Product not found');
     }
-    res.render('product', { product });
+    res.render('product', { product, layout: 'layouts/main' });
   } catch (err) {
     res.status(500).send('Server Error');
   }
 };
 
-// Create product
 exports.createProduct = async (req, res) => {
   try {
     const product = new Product({
       name: req.body.name,
       description: req.body.description,
+      manufacturer: req.body.manufacturer,
       price: req.body.price,
       stock: req.body.stock,
     });

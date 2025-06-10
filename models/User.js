@@ -17,6 +17,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  cart: [{product: { type: mongoose.Schema.Types.ObjectId, ref: 'products', unique: true },
+          quantity: { type: Number, required: true, min: 1 }}],
   createdAt: {
     type: Date,
     default: Date.now,
