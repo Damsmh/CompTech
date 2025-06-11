@@ -8,7 +8,7 @@ exports.register = async (req, res) => {
     await user.save();
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true });
-    res.redirect('/products');
+    res.redirect('/home');
   } catch (err) {
     res.status(400).render('register', { error: 'Username already exists or invalid data' });
   }
@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
     }
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true });
-    res.redirect('/products');
+    res.redirect('/home');
   } catch (err) {
     res.status(500).render('login', { error: 'Server error' });
   }
