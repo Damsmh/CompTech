@@ -6,7 +6,9 @@ exports.register = async (req, res) => {
     const { username, email, password } = req.body;
     const user = new User({ username, email, password });
     await user.save();
-    res.redirect('/login');
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.cookie('token', token, { httpOnly: true });
+    res.redirect('/products');
   } catch (err) {
     res.status(400).render('register', { error: 'Username already exists or invalid data' });
   }
