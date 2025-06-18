@@ -8,6 +8,8 @@ const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const profileRoutes = require('./routes/profileRoutes');
+const authMiddleware = require('./middleware/authMIddleware');
 
 dotenv.config();
 const app = express();
@@ -25,13 +27,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
+app.get('/', authMiddleware, (req, res) => {
   res.render('home', { layout: 'layouts/main' });
 });
 app.use('/products', productRoutes);
 app.use('/', authRoutes);
 app.use('/cart', cartRoutes);
 app.use('/order', orderRoutes);
+app.use('/profile', profileRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

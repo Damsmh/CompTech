@@ -1,0 +1,14 @@
+<h1>Profile</h1>
+
+{{#if error}}
+  <p style="color: red;">{{error}}</p>
+{{/if}}
+
+<div>
+    <img src="{{user.avatar}}" alt="">
+    <h2>{{user.username}}</h2>
+</div>
+<div>
+    <p>Баланс: {{user.balance}}Р</p>
+    <input placeholder="Введите Email..." type="email" value="{{user.email}}"/>
+</div>

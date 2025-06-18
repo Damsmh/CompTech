@@ -17,6 +17,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    type: String,
+    required: true,
+    default: '/public/defaultAvatar.jpg',
+  },
+  balance: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   cart: [{product: { type: mongoose.Schema.Types.ObjectId, ref: 'products'},
           quantity: { type: Number, min: 1 }}],
   createdAt: {
