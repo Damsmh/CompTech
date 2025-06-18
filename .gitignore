@@ -1,4 +1,4 @@
 .env
 /node_modules
 .vscode
-/public/static
+/public/static/avatars

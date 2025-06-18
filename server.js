@@ -9,7 +9,7 @@ const authRoutes = require('./routes/authRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const profileRoutes = require('./routes/profileRoutes');
-const authMiddleware = require('./middleware/authMIddleware');
+const authMiddleware = require('./middleware/authMiddleware');
 
 dotenv.config();
 const app = express();
