@@ -6,6 +6,11 @@ const productSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  photo: {
+    type: String,
+    required: true,
+    default: '/public/defaultImage.png',
+  },
   description: {
     type: String,
     trim: true,

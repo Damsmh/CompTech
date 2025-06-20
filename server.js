@@ -27,9 +27,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public/static', express.static(path.join(__dirname, 'public/static')));
-app.use('/public', express.static(path.join(__dirname, 'public/static')));
 
-app.get('/', authMiddleware, (req, res) => {
+app.get('/', (req, res) => {
   res.render('home', { layout: 'layouts/main' });
 });
 app.use('/products', productRoutes);

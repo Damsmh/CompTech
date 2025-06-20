@@ -43,3 +43,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+document.querySelectorAll('.update-form input[name="quantity"]').forEach(input => {
+  input.addEventListener('change', function() {
+    this.form.submit();
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const navLinks = document.querySelectorAll(".navbar .nav-link");
+    const currentPath = window.location.pathname;
+
+    navLinks.forEach(link => {
+      const linkPath = new URL(link.href).pathname;
+
+      if (currentPath === linkPath || currentPath.startsWith(linkPath + '/')) {
+        link.classList.add("active");
+      }
+    });
+  });

@@ -1,11 +1,19 @@
-<h1>{{product.name}}</h1>
-<p><strong>Описание:</strong> {{product.description}}</p>
-<p><strong>Производитель:</strong> {{product.manufacturer}}</p>
-<p><strong>Цена:</strong> {{product.price}}₽</p>
-<p><strong>Осталось:</strong> {{product.stock}} шт</p>
-<form method="POST" action="/cart/add/{{product._id}}">
-    <label for="quantity">Количество:</label>
-    <input type="number" id="quantity" name="quantity" min="1" max="{{product.stock}}" value="1" required>
-    <button type="submit">Добавить в корзину</button>
-</form>
-<p><a href="/products">Назад</a></p>
+<div class="max-w-7xl mx-auto p-4">
+    {{#if error}}
+        <p class="text-red-500 text-sm mb-4 text-center">{{error}}</p>
+    {{/if}}
+    <div class="card p-4 mx-auto bg-white shadow-sm" style="max-width: 500px;">
+        <img src="{{product.photo}}" alt="{{product.name}}" class="img-fluid mb-3 rounded" style="max-height: 250px; object-fit: cover; width: 100%;">
+        <h2 class="mb-3 text-2xl font-bold text-gray-800">{{product.name}}</h2>
+        <p class="mb-1"><strong>Описание:</strong> {{product.description}}</p>
+        <p class="mb-1"><strong>Производитель:</strong> {{product.manufacturer}}</p>
+        <p class="mb-1"><strong>Цена:</strong> <span class="text-success">{{product.price}}₽</span></p>
+        <p class="mb-3"><strong>Осталось:</strong> {{product.stock}} шт</p>
+        <form method="POST" action="/cart/add/{{product._id}}" class="d-flex gap-2 align-items-center">
+            <label for="quantity" class="form-label mb-0">Количество:</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="{{product.stock}}" value="1" required class="form-control" style="width: 90px;">
+            <button type="submit" class="btn btn-primary">В корзину</button>
+        </form>
+        <a href="/products" class="btn btn-link mt-3">Назад к списку</a>
+    </div>
+</div>

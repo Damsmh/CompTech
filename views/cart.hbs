@@ -1,29 +1,57 @@
-<h1>Cart</h1>
-<h2>Общая сумма корзины: {{totalsum}}</h2>
-<form method="POST" action="/order/add">
-  <button type="submit">Buy All</button>
-</form>
-<ul>
-  {{#each products}}
-    <li>
-      <a href="/products/{{this.product._id}}">{{this.product.name}}</a> - {{this.product.price}}₽
-        <span>Количество: {{this.quantity}}</span>
-        <span>Сумма: {{multiply this.product.price this.quantity}}₽</span>
-        <form method="POST" action="/cart/update/{{this.product._id}}" style="display:inline;" class="update-form">
-            <input type="number" name="quantity" value="{{this.quantity}}" min="1" max="{{this.product.stock}}" required>
-        </form>
-        <form method="POST" action="/cart/remove/{{this.product._id}}" style="display:inline;">
-            <button type="submit">Remove</button>
-        
-        </form>
-    </li>
-  {{/each}}
-</ul>
+<h1 class="mb-4">Корзина</h1>
+<div class="card p-4 mb-4">
+  <h4 class="mb-3">Общая сумма: <span class="text-success">{{totalsum}}₽</span></h4>
 
-<script>
-document.querySelectorAll('.update-form input[name="quantity"]').forEach(input => {
-  input.addEventListener('change', function() {
-    this.form.submit();
-  });
-});
-</script>
+  <form method="POST" action="/order/add" class="mb-3">
+    <button type="submit" class="btn btn-primary w-100">Купить всё</button>
+  </form>
+  {{#if error}}
+    <div class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
+    <ul class="list-group">
+    {{#each products}}
+      <li class="list-group-item d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+        <div>
+          <a href="/products/{{this.product._id}}" class="fw-semibold">{{this.product.name}}</a>
+          <span class="text-muted">({{this.product.price}}₽)</span>
+        </div>
+        <div class="d-flex align-items-center gap-3 mt-2 mt-md-0">
+          <span>Кол-во: {{this.quantity}}</span>
+          <span>Сумма: <span class="text-success">{{multiply this.product.price this.quantity}}₽</span></span>
+          <form method="POST" action="/cart/update/{{this.product._id}}" class="d-inline update-form">
+            <input type="number" name="quantity" value="{{this.quantity}}" min="1" max="{{this.product.stock}}" class="form-control form-control-sm d-inline-block" style="width: 70px;" required>
+          </form>
+          <form method="POST" action="/cart/remove/{{this.product._id}}" class="d-inline">
+            <button type="submit" class="btn btn-outline-danger btn-sm">Удалить</button>
+          </form>
+        </div>
+      </li>
+    {{/each}}
+    </ul>
+  {{else}}
+  <ul class="list-group">
+    {{#each products}}
+      <li class="list-group-item d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+        <div>
+          <a href="/products/{{this.product._id}}" class="fw-semibold">{{this.product.name}}</a>
+          <span class="text-muted">({{this.product.price}}₽)</span>
+        </div>
+        <div class="d-flex align-items-center gap-3 mt-2 mt-md-0">
+          <span>Кол-во: {{this.quantity}}</span>
+          <span>Сумма: <span class="text-success">{{multiply this.product.price this.quantity}}₽</span></span>
+          <form method="POST" action="/cart/update/{{this.product._id}}" class="d-inline update-form">
+            <input type="number" name="quantity" value="{{this.quantity}}" min="1" max="{{this.product.stock}}" class="form-control form-control-sm d-inline-block" style="width: 70px;" required>
+          </form>
+          <form method="POST" action="/cart/remove/{{this.product._id}}" class="d-inline">
+            <button type="submit" class="btn btn-outline-danger btn-sm">Удалить</button>
+          </form>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+  
+  
+</div>
+

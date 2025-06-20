@@ -1,20 +1,22 @@
-<h1>Заказы</h1>
-
-<ul>
+<h1 class="mb-4">Ваши заказы</h1>
+<div class="row g-3">
   {{#each orders}}
-    <li>
-        <h2>Заказ №{{this._id}} от {{this.createdAt}}</h2>
-
-        <ul>
-        {{#each this.products}}
-            <li>
-                <a href="/products/{{this.product._id}}">{{this.product.name}}</a> {{this.quantity}} шт - {{multiply this.price this.quantity}}₽
+    <div class="col-12">
+      <div class="card shadow-sm p-3">
+        <h5 class="mb-2">Заказ №{{this._id}} <span class="text-muted fs-6">от {{this.createdAt}}</span></h5>
+        <ul class="list-group mb-2">
+          {{#each this.products}}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>
+                <a href="/products/{{this.product._id}}" class="fw-semibold">{{this.product.name}}</a>
+                <span class="text-muted">× {{this.quantity}}</span>
+              </span>
+              <span>{{multiply this.price this.quantity}}₽</span>
             </li>
-        {{/each}}
+          {{/each}}
         </ul>
-        </li>
-        <h2>{{this.total}}₽</h2>
-    </li>   
-    
+        <div class="fw-bold text-end">Итого: <span class="text-success">{{this.total}}₽</span></div>
+      </div>
+    </div>
   {{/each}}
-</ul>
+</div>

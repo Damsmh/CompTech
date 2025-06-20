@@ -1,15 +1,23 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-}
-header, footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #f8f8f8;
-}
 nav a {
   margin: 0 10px;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.navbar.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  }
+main {
+    flex-grow: 1;
+}
+footer {
+    width: 100%;
 }
 form {
   margin-top: 20px;
@@ -39,4 +47,35 @@ input, button {
 .avatar-container:hover img {
     opacity: 0.7;
     transition: opacity 0.3s ease;
+}
+
+footer .navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navbar .nav-link {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.navbar .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar .nav-link.active::after {
+  width: 100%;
 }

@@ -1,10 +1,16 @@
-<h2>Products</h2>
-
-
-<ul>
-  {{#each products}}
-    <li>
-      <a href="/products/{{this._id}}">{{this.name}}</a> - {{this.price}}₽
-    </li>
-  {{/each}}
-</ul>
+<h1 class="mb-4 text-2xl font-bold text-gray-800">Товары</h1>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+    {{#each products}}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="{{this.photo}}" alt="{{this.name}}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="/products/{{this._id}}" class="text-decoration-none text-gray-800">{{this.name}}</a>
+                    </h5>
+                    <p class="card-text text-success fw-semibold">{{this.price}}₽</p>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
