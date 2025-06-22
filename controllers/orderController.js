@@ -61,6 +61,6 @@ exports.addOrder = async (req, res) => {
         var totalsum = user.cart.reduce((sum, item) => {
           return sum + (item.product.price * item.quantity);
         }, 0);
-        return res.render('cart', { products: user.cart, error: `Ошибка при создании баланса`, totalsum, layout: 'layouts/main' });
+        return res.render('cart', { products: user.cart, error: `Ошибка при создании заказа`, totalsum, layout: 'layouts/main' });
     }
 };

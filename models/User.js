@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     required: true,
-    default: '/public/defaultAvatar.jpg',
+    default: '/static/defaultAvatar.jpg',
   },
   balance: {
     type: Number,
