@@ -14,7 +14,13 @@
     </div>
     <h4 class="mb-1">{{user.username}}</h4>
     <p class="mb-1 text-muted">Баланс: <span class="fw-semibold">{{user.balance}}₽</span></p>
-    <input class="form-control mb-2" placeholder="Введите Email..." type="email" value="{{user.email}}" readonly/>
+    <form id="emailForm" class="w-100">
+      <div class="mb-3">
+        <label for="emailInput" class="form-label">Email</label>
+        <input class="form-control mb-2" id="emailInput" name="email" placeholder="Введите Email..." type="email" value="{{user.email}}" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Обновить Email</button>
+    </form>
   </div>
 </div>
 

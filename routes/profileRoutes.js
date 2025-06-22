@@ -27,6 +27,7 @@ const upload = multer({
 
 router.get('/', authMiddleware, profileController.profile);
 router.post('/avatar', authMiddleware, upload.single('avatar'), profileController.avatar);
+router.post('/email', authMiddleware, profileController.email);
 
 
 module.exports = router;

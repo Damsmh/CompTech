@@ -22,3 +22,18 @@ exports.avatar = async (req, res) => {
         res.status(400).json({ success: false, error: err.message || 'Ошибка загрузки аватара' });
     }
 };
+
+exports.email = async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({ success: false, error: 'Email не указан' });
+        }
+        const updatedUser = await User.findByIdAndUpdate(req.userId, { email }, { new: true });
+        updatedUser.save();
+        res.json({ success: true, email: updatedUser.email });
+    } catch (err) {
+        console.error('Ошибка обновления email:', err);
+        res.status(400).json({ success: false, error: err.message || 'Ошибка обновления email' });
+    }
+};
